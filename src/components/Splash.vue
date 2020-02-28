@@ -17,7 +17,6 @@
         ></v-text-field>
       </v-form>
     </v-toolbar>
-    <!-- <v-progress-linear v-if="isLoading" indeterminate color="green"></v-progress-linear> -->
     <v-container>
       <v-card v-if="search" class="my-4 pa-4">Search Results for "{{ search }}"</v-card>
       <v-row v-if="isLoading">
@@ -94,7 +93,6 @@ export default {
     showDialog(splash) {
       this.dialogSplash = splash;
       this.dialog = true;
-      // console.log(splash);
     },
     searchQuery() {
       this.isLoading = true;
@@ -106,10 +104,7 @@ export default {
           this.isLoading = false;
           return response.json();
         })
-        .then(data => {
-          this.unsplash = data.results;
-          console.log(data);
-        });
+        .then(data => (this.unsplash = data.results));
     }
   },
   created() {
@@ -120,10 +115,7 @@ export default {
         this.isLoading = false;
         return response.json();
       })
-      .then(data => {
-        this.unsplash = data.results;
-        console.log(data);
-      });
+      .then(data => (this.unsplash = data.results));
   }
 };
 </script>
