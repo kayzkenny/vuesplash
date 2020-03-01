@@ -85,7 +85,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "Splash",
   inject: ["theme"],
   data: () => ({
     unsplash: [],
