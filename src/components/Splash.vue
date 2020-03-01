@@ -133,7 +133,11 @@ export default {
           this.isLoading = false;
           return response.json();
         })
-        .then(data => (this.unsplash = data.results));
+        .then(data => {
+          this.unsplash = data.results;
+          this.total = data.total;
+          this.total_pages = data.total_pages;
+        });
     },
     /**
      * Fetch photos with default search string and assign to unsplash property
@@ -154,31 +158,34 @@ export default {
         });
     },
     /**
+     * If search input is null run searchQuery else run default search
+     * @function
+     */
+    paginate() {
+      this.search ? this.searchQuery() : this.defaultSearchQuery();
+    },
+    /**
      * Called when the next button is clicked on v-pagination
      * @function
      */
     next() {
-      this.search ? this.searchQuery() : this.defaultSearchQuery();
+      this.paginate();
     },
     /**
      * Called when the previous button is clicked on v-pagination
      * @function
      */
     prev() {
-      this.search ? this.searchQuery() : this.defaultSearchQuery();
+      this.paginate();
     },
     /**
      * Called when the input button is clicked on v-pagination
      * @function
      */
     input() {
-      this.search ? this.searchQuery() : this.defaultSearchQuery();
+      this.paginate();
     }
   },
-  /**
-   * Fetch photos with default search and assign to unsplash property
-   * @function
-   */
   created() {
     this.defaultSearchQuery();
   }
